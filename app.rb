@@ -4,19 +4,38 @@ require 'sinatra/reloader'
 also_reload '.lib/**/*.rb'
 require './lib/patient'
 require './lib/doctor'
+require './lib/specialty'
 require 'pg'
 
 DB = PG.connect({dbname: 'doctors_office'})
 
 get('/') do
-  @doctors = Doctor.all
   erb(:home)
+end
+
+get('/admin_home') do
+  @doctors = Doctor.all
+  erb(:admin_home)
 end
 
 get("/doctors/:id") do
   @doctors = Doctor.all
   @doctor = Doctor.find(params.fetch("id").to_i())
   erb(:doctor)
+end
+
+get ('/specialty') do
+  @specialty = Specialty.all[0]
+  @specialties = Specialty.all
+
+  erb(:patient)
+end
+
+post("/specialty") do
+  name = params['specialty']
+  @specialties = Specialty.all
+  @specialty = Specialty.find(name)
+  erb(:patient)
 end
 
 post("/doctors/:id") do
@@ -34,10 +53,13 @@ end
 
 post('/doctor') do
   name = params['name']
-  specialty = params['specialty']
+  specialty_name = params['specialty']
 
-  doctor = Doctor.new({name: name, specialty: specialty, id: nil})
+
+  specialty = Specialty.new({name: specialty_name, id: nil})
+  specialty.save
+  doctor = Doctor.new({name: name, id: nil, specialty_id: specialty.id})
   doctor.save
   @doctors = Doctor.all
-  erb(:home)
+  erb(:admin_home)
 end

@@ -1,5 +1,6 @@
 require 'rspec'
 require 'doctor'
+require 'patient'
 require 'pry'
 require 'pg'
 require 'spec_helper'
@@ -15,21 +16,21 @@ require 'spec_helper'
 
   describe("#name") do
    it("tells you their name") do
-     doctor = Doctor.new({name:"Dr. Jones", specialty: "Witch Doctor", id: nil})
+     doctor = Doctor.new({name:"Dr. Jones", specialty_id: 1, id: nil})
      expect(doctor.name).to(eq("Dr. Jones"))
      end
    end
 
    describe("#specialty") do
     it("tells you their specialty") do
-      doctor = Doctor.new({name:"Dr. Jones", specialty: "Witch Doctor", id: nil})
-      expect(doctor.specialty).to(eq("Witch Doctor"))
+      doctor = Doctor.new({name:"Dr. Jones", specialty_id: 1, id: nil})
+      expect(doctor.specialty_id).to(eq(1))
       end
     end
 
   describe("#id") do
     it("sets their ID when you save it") do
-      doctor = Doctor.new({name:"Dr. Jones", specialty: "Witch Doctor", id: nil})
+      doctor = Doctor.new({name:"Dr. Jones", specialty_id: 1, id: nil})
       doctor.save()
       expect(doctor.id).to(be_an_instance_of(Fixnum))
     end
@@ -37,7 +38,7 @@ require 'spec_helper'
 
   describe("#save") do
   it("lets you save doctors to the database") do
-    doctor = Doctor.new({name:"Dr. Jones", specialty: "Witch Doctor", id: nil})
+    doctor = Doctor.new({name:"Dr. Jones", specialty_id: 1, id: nil})
     doctor.save()
     expect(Doctor.all).to(eq([doctor]))
     end
@@ -45,15 +46,15 @@ require 'spec_helper'
 
   describe("#==") do
     it("is the same doctor if it they have the same name") do
-     doctor1 = Doctor.new({name:"Dr. Jones", specialty: "Witch Doctor", id: nil})
-     doctor2 = Doctor.new({name:"Dr. Jones", specialty: "Witch Doctor", id: nil})
+     doctor1 = Doctor.new({name:"Dr. Jones", specialty_id: 1, id: nil})
+     doctor2 = Doctor.new({name:"Dr. Jones", specialty_id: 1, id: nil})
      expect(doctor1).to(eq(doctor2))
     end
   end
 
   describe("#patients") do
     it("returns an array of patients for that doctor") do
-      test_doctor = Doctor.new({name:"Dr. Jones", specialty: "Witch Doctor", id: nil})
+      test_doctor = Doctor.new({name:"Dr. Jones", specialty_id: 1, id: nil})
       test_doctor.save()
       test_task = Patient.new({name:"Mr. Smith", birthday: "1960-05-18", doctor_id: test_doctor.id, id: nil})
       test_task.save()
@@ -65,9 +66,9 @@ require 'spec_helper'
 
   describe(".find") do
     it("returns a doctor by its ID") do
-      test_doctor = Doctor.new({name:"Dr. Jones", specialty: "Witch Doctor", id: nil})
+      test_doctor = Doctor.new({name:"Dr. Jones", specialty_id: 1, id: nil})
       test_doctor.save()
-      test_doctor2 = Doctor.new({name:"Dr. Jones", specialty: "Witch Doctor", id: nil})
+      test_doctor2 = Doctor.new({name:"Dr. Jones", specialty_id: 1, id: nil})
       test_doctor2.save()
       expect(Doctor.find(test_doctor2.id())).to(eq(test_doctor2))
     end

@@ -1,35 +1,3 @@
-<h1>Administrative Forms</h1>
+<a href="/admin_home"><button class="btn btn-info" type="button" name="button">Administrator</button></a>
 
-<form class="doctorForm" action="/doctor" method="post">
-  <div class="form-group">
-    <label for="name">Enter Name of Doctor:</label>
-    <input type="text" name="name" placeholder="'Dr. Jones'" required>
-  </div>
-  <div class="form-group">
-    <label for="specialty">Enter Specialty of Doctor:</label>
-    <input type="text" name="specialty" placeholder="'Anesthesiology'" required>
-  </div>
-
-  <button type="submit" class="btn btn-info">Submit</button>
-</form>
-
-<h1>Your Current Doctorss</h1>
-
-<% if @doctors.any?() %>
-  <h3>Here are your doctors:</h3>
-
-  <ul>
-    <% @doctors.each() do |doctor| %>
-      <li><a href="/doctors/<%= doctor.id()%>"><%= doctor.name() %></a> </li>
-    <% end %>
-  </ul>
-
-<% else %>
-
-    <p>There are no doctors yet!</p>
-
-<% end %>
-
-<div class="container">
-  <a href="/"><button class="btn">Home</a>
-</div>
+<a href="/specialty"><button class="btn btn-info" type="button" name="button">Patient</button></a>
