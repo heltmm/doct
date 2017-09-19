@@ -1,0 +1,31 @@
+<h1>Administrative Forms</h1>
+
+<form class="doctorForm" action="/doctor" method="post">
+  <div class="form-group">
+    <label for="name">Enter Name of Doctor:</label>
+    <input type="text" name="name" placeholder="'Dr. Jones'" required>
+  </div>
+  <div class="form-group">
+    <label for="specialty">Enter Specialty of Doctor:</label>
+    <input type="text" name="specialty" placeholder="'Anesthesiology'" required>
+  </div>
+
+  <button type="submit" class="btn btn-info">Submit</button>
+</form>
+
+<form class="patientForm" action="/patient" method="post">
+  <div class="form-group">
+    <label for="name">Enter Name of Patient:</label>
+    <input type="text" name="name" placeholder="'Mr. Smith'" required>
+  </div>
+  <div class="form-group">
+    <label for="birthday">Enter Patient Birthday:</label>
+    <input type="date" name="birthday" placeholder="'XXXX-XX-XX'" required>
+  </div>
+  <div class="form-group">
+    <label for="doctor_id">Enter Doctor:</label>
+    <input type="text" name="doctor_id" placeholder="'1'" required>
+  </div>
+
+  <button type="submit" class="btn btn-info">Submit</button>
+</form>
