@@ -1,0 +1,33 @@
+<h1><%= @doctor.name() %></h1>
+
+<% if @doctor.patients().any?() %>
+  <h3>Here are all the patients for this doctor:</h3>
+
+  <ul>
+    <% @doctor.patients().each() do |patient| %>
+      <li><%= patient.name() %> </li>
+    <% end %>
+  </ul>
+
+  <% else %>
+    <p>There are no patients for this doctor!</p>
+  <% end %>
+
+
+
+<form class="patientForm" action="/doctors/<%= @doctor.id %>" method="post">
+  <div class="form-group">
+    <label for="name">Enter Name of Patient:</label>
+    <input type="text" name="name" placeholder="'Mr. Smith'" required>
+  </div>
+  <div class="form-group">
+    <label for="birthday">Enter Patient Birthday:</label>
+    <input type="date" name="birthday" placeholder="'XXXX-XX-XX'" required>
+  </div>
+
+  <button type="submit" class="btn btn-info">Submit</button>
+</form><br>
+
+<div class="container">
+  <a href="/"><button class="btn btn-info">Home</a>
+</div>

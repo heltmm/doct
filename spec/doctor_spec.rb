@@ -50,4 +50,26 @@ require 'spec_helper'
      expect(doctor1).to(eq(doctor2))
     end
   end
+
+  describe("#patients") do
+    it("returns an array of patients for that doctor") do
+      test_doctor = Doctor.new({name:"Dr. Jones", specialty: "Witch Doctor", id: nil})
+      test_doctor.save()
+      test_task = Patient.new({name:"Mr. Smith", birthday: "1960-05-18", doctor_id: test_doctor.id, id: nil})
+      test_task.save()
+      test_task2 = Patient.new({name:"Mr. Smith", birthday: "1960-05-18", doctor_id: test_doctor.id, id: nil})
+      test_task2.save()
+      expect(test_doctor.patients()).to(eq([test_task, test_task2]))
+    end
+  end
+
+  describe(".find") do
+    it("returns a doctor by its ID") do
+      test_doctor = Doctor.new({name:"Dr. Jones", specialty: "Witch Doctor", id: nil})
+      test_doctor.save()
+      test_doctor2 = Doctor.new({name:"Dr. Jones", specialty: "Witch Doctor", id: nil})
+      test_doctor2.save()
+      expect(Doctor.find(test_doctor2.id())).to(eq(test_doctor2))
+    end
+  end
 end

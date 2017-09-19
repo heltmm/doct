@@ -13,19 +13,23 @@
   <button type="submit" class="btn btn-info">Submit</button>
 </form>
 
-<form class="patientForm" action="/patient" method="post">
-  <div class="form-group">
-    <label for="name">Enter Name of Patient:</label>
-    <input type="text" name="name" placeholder="'Mr. Smith'" required>
-  </div>
-  <div class="form-group">
-    <label for="birthday">Enter Patient Birthday:</label>
-    <input type="date" name="birthday" placeholder="'XXXX-XX-XX'" required>
-  </div>
-  <div class="form-group">
-    <label for="doctor_id">Enter Doctor:</label>
-    <input type="text" name="doctor_id" placeholder="'1'" required>
-  </div>
+<h1>Your Current Doctorss</h1>
 
-  <button type="submit" class="btn btn-info">Submit</button>
-</form>
+<% if @doctors.any?() %>
+  <h3>Here are your doctors:</h3>
+
+  <ul>
+    <% @doctors.each() do |doctor| %>
+      <li><a href="/doctors/<%= doctor.id()%>"><%= doctor.name() %></a> </li>
+    <% end %>
+  </ul>
+
+<% else %>
+
+    <p>There are no doctors yet!</p>
+
+<% end %>
+
+<div class="container">
+  <a href="/"><button class="btn">Home</a>
+</div>
